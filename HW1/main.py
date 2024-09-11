@@ -63,3 +63,12 @@ print(f"Max value (MapReduce): {max_value_mapreduce}, Time: {end_time - start_ti
 # Введіть кількість потоків для MapReduce: 100
 # Max value (standard): 1000, Time: 2283.100380420685 seconds
 # Max value (MapReduce): 1000, Time: 18808.188708782196 seconds
+
+# Введіть кількість елементів у масиві: 10000000
+# Введіть кількість потоків для MapReduce: 1000
+# Max value (standard): 1000, Time: 0.16844725608825684 seconds
+# Time for cropped in chunks: 0.11290359497070312 seconds
+# Max value (MapReduce): 1000, Time: 0.4196147918701172 seconds
+#
+# Process finished with exit code 0
+
