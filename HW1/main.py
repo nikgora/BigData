@@ -21,8 +21,11 @@ def find_max_standard(arr):
 
 # Реалізація через MapReduce
 def find_max_mapreduce(arr, num_threads):
+    start_time = time.time()
     chunk_size = len(arr) // num_threads
     chunks = [arr[i:i + chunk_size] for i in range(0, len(arr), chunk_size)]
+    end_time = time.time()
+    print(f"Time for cropped in chunks: {end_time - start_time} seconds")
 
     # Паралельне обчислення максимумів для кожної частини
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
