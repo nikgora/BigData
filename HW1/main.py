@@ -20,7 +20,7 @@ def find_max_standard(arr):
 
 
 # Реалізація через MapReduce
-def find_max_mapreduce(arr, num_threads):
+def find_max_mapreduce(arr, num_threads, thread_pool):
     start_time = time.time()
     chunk_size = len(arr) // num_threads
     chunks = [arr[i:i + chunk_size] for i in range(0, len(arr), chunk_size)]
@@ -28,7 +28,7 @@ def find_max_mapreduce(arr, num_threads):
     print(f"Time for cropped in chunks: {end_time - start_time} seconds")
 
     # Паралельне обчислення максимумів для кожної частини
-    with ThreadPoolExecutor(max_workers=num_threads) as executor:
+    with thread_pool as executor:
         max_values = list(executor.map(find_max_chunk, chunks))
 
     # Знаходимо загальний максимум
@@ -43,7 +43,7 @@ def generate_random_array(size):
 # Введення кількості елементів від користувача
 size = int(input("Введіть кількість елементів у масиві: "))
 num_threads = int(input("Введіть кількість потоків для MapReduce: "))
-
+thread_pool = ThreadPoolExecutor(num_threads)
 # Генеруємо випадковий масив
 arr = generate_random_array(size)
 
@@ -55,7 +55,7 @@ print(f"Max value (standard): {max_value_standard}, Time: {end_time - start_time
 
 # MapReduce реалізація
 start_time = time.time()
-max_value_mapreduce = find_max_mapreduce(arr, num_threads)
+max_value_mapreduce = find_max_mapreduce(arr, num_threads, thread_pool)
 end_time = time.time()
 print(f"Max value (MapReduce): {max_value_mapreduce}, Time: {end_time - start_time} seconds")
 # :\BigData\HW1\.venv\Scripts\python.exe E:\BigData\HW1\main.py
