@@ -28,7 +28,10 @@ def find_max_mapreduce(arr, num_threads, thread_pool):
     print(f"Time for cropped in chunks: {end_time - start_time} seconds")
 
     # Паралельне обчислення максимумів для кожної частини
+    start_time = time.time()
     with thread_pool as executor:
+        end_time = time.time()
+        print(f"Time for create thread: {end_time - start_time} seconds")
         max_values = list(executor.map(find_max_chunk, chunks))
 
     # Знаходимо загальний максимум
