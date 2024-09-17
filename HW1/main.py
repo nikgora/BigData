@@ -43,7 +43,7 @@ def find_max_mapreduce(arr, num_processes):
     print(f"Time for splitting into chunks: {end_time - start_time} seconds")
     split_time = end_time - start_time
 
-    # Parallel calculation of maxima for each chunk using multiprocessing
+    # Parallel calculation of max for each chunk using multiprocessing
     start_time = time.time()
     with Pool(processes=num_processes) as pool:
         max_values = pool.map(find_max_chunk, chunks)
