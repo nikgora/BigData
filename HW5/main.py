@@ -14,7 +14,7 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Розділяємо дані
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3512, random_state=71538)
 
 # Визначаємо параметри для GridSearchCV
 param_grid = {
@@ -28,7 +28,7 @@ param_grid = {
 svc = svm.SVC()
 
 # Налаштовуємо параметри за допомогою GridSearchCV
-grid = GridSearchCV(svc, param_grid, refit=True, verbose=2, cv=10)
+grid = GridSearchCV(svc, param_grid, refit=True, verbose=3, cv=32)
 grid.fit(X_train, y_train)
 
 # Виводимо найкращі параметри

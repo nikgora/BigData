@@ -72,20 +72,19 @@ SVM прагне знайти гіперплощину, яка максимал�
 
 ```
 багато подібних логів
-[CV] END ....C=100000, degree=10, gamma=1e-05, kernel=linear; total time=   0.0s
-[CV] END ....C=100000, degree=10, gamma=1e-05, kernel=linear; total time=   0.0s
-[CV] END ....C=100000, degree=10, gamma=1e-05, kernel=linear; total time=   0.0s
+[CV 31/32] END C=100000, degree=10, gamma=1e-05, kernel=linear;, score=1.000 total time=   0.0s
+[CV 32/32] END C=100000, degree=10, gamma=1e-05, kernel=linear;, score=1.000 total time=   0.0s
 Найкращі параметри:
-{'C': 100, 'degree': 2, 'gamma': 0.1, 'kernel': 'sigmoid'}
+{'C': 1, 'degree': 3, 'gamma': 1, 'kernel': 'poly'}
               precision    recall  f1-score   support
 
-           0       1.00      1.00      1.00        19
-           1       1.00      0.92      0.96        13
-           2       0.93      1.00      0.96        13
+           0       1.00      1.00      1.00        15
+           1       0.89      0.89      0.89        18
+           2       0.90      0.90      0.90        20
 
-    accuracy                           0.98        45
-   macro avg       0.98      0.97      0.97        45
-weighted avg       0.98      0.98      0.98        45
+    accuracy                           0.92        53
+   macro avg       0.93      0.93      0.93        53
+weighted avg       0.92      0.92      0.92        53
 
 
 Process finished with exit code 0
