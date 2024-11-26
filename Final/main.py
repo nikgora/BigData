@@ -14,11 +14,13 @@ def map_reduce_matrix_multiplication(A, B):
             for k in range(len(B[0])):
                 mapped_values.append(((i, k), A[i][j] * B[j][k]))
 
+    print("Mapped values:", mapped_values)
     # Reduce phase
     reduced_values = defaultdict(int)
     for key, value in mapped_values:
         reduced_values[key] += value
 
+    print("Reduced values:", reduced_values)
     # Формуємо результуючу матрицю
     n_rows = len(A)
     n_cols = len(B[0])
