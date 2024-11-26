@@ -5,32 +5,39 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import time
 
-mnist = fetch_openml('mnist_784', version=1)
-X = mnist.data.values
-y = mnist.target.astype(int).values
+X = [[1, 2, 3, 4], [1, 1, 2, 3], [2, 1, 2, 2]]
 
 # Data normalization
 X_scaled = StandardScaler().fit_transform(X)
-
+print("X_scaled: ", X_scaled)
 # 2. My PCA
 start_time = time.time()
 covariance_matrix = np.cov(X_scaled, rowvar=False)
-
+print("covariance_matrix: ", covariance_matrix)
 eigen_values, eigen_vectors = np.linalg.eigh(covariance_matrix)
-
+print("eigen_values: ", eigen_values)
+print("eigen_vectors: ", eigen_vectors)
 sorted_index = np.argsort(eigen_values)[::-1]
+print("sorted_index: ", sorted_index)
 sorted_eigenvalues = eigen_values[sorted_index]
+print("sorted_eigenvalues: ", sorted_eigenvalues)
 sorted_eigenvectors = eigen_vectors[:, sorted_index]
+print("sorted_eigenvectors: ", sorted_eigenvectors)
 
 total_variance = np.sum(sorted_eigenvalues)
+print("total_variance: ", total_variance)
 explained_variance_ratio = sorted_eigenvalues / total_variance
+print("explained_variance_ratio: ", explained_variance_ratio)
 cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+print("cumulative_variance_ratio: ", cumulative_variance_ratio)
 
-k = np.argmax(cumulative_variance_ratio >= 0.995) + 1
+k = 2
 print(f'Selected k = {k}, which explains {cumulative_variance_ratio[k-1]*100:.2f}% of the variance.')
 
 projection_matrix = sorted_eigenvectors[:, :k]
+print("projection_matrix: ", projection_matrix)
 X_reduced_my = np.dot(X_scaled, projection_matrix)
+print("X_reduced_my: ", X_reduced_my)
 my_time = time.time() - start_time
 
 
@@ -47,10 +54,8 @@ plt.show()
 
 
 X_vis = X_reduced_my
-y_vis = y
-
 plt.figure(figsize=(12, 8))
-scatter = plt.scatter(X_vis[:, 0], X_vis[:, 1], c=y_vis, cmap='tab10', alpha=0.7)
+scatter = plt.scatter(X_vis[:, 0], X_vis[:, 1], cmap='tab10', alpha=0.7)
 plt.xlabel('Principal component 1')
 plt.ylabel('Principal component 2')
 plt.title('PCA on MNIST dataset (first 2 components)')
@@ -59,9 +64,10 @@ plt.grid(True)
 plt.show()
 
 # 3. Compare to scikit-learn PCA
-pca = PCA(n_components=k)
+pca = PCA(n_components=2)
 start_time = time.time()
 X_reduced_sklearn = pca.fit_transform(X_scaled)
+print("X_reduced_sklearn: ", X_reduced_sklearn)
 sklearn_time = time.time() - start_time
 
 print(f'My PCA algorithm running time: {my_time:.4f} seconds')
